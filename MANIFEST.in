@@ -1,0 +1,5 @@
+include LICENSE
+include README.rst
+recursive-include pa/static *
+recursive-include pa/templates *
+recursive-include docs *
