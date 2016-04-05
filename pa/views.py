@@ -1,15 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.decorators import login_required
+
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
 
 
-
 # Create your views here.
 
+def save_profile():
+    user = User.objects.create_user('bob', 'bob@example.com', 'password')
+    user.first_name = "Bob"
+    user.last_name = "Smith"
+    user.save()
+    
+    user_profile = user.get_profile()
+    user_profile.display_name = "Bob Smith"
+    user_profile.save()
+
+@login_required
 def index(request):
-    return HttpResponse("Welcome to Django-pa.");
+    user_profile = request.user.profile
+    
+    return HttpResponse("User url is : "+user_profile.url);
 
 class UserViewSet(viewsets.ModelViewSet):
     """
