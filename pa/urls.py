@@ -11,6 +11,7 @@ urlpatterns = [
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
+router.register(r'site_data', views.SiteDataViewSet)
 router.register(r'groups', views.GroupViewSet)
 
 # Wire up our API using automatic URL routing.
