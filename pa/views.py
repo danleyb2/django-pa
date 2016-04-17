@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
+from .models import UserProfile,SiteInfo
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer,SiteSerializer,UserProfileSerializer
+from rest_framework import permissions
 
 
 # Create your views here.
@@ -31,11 +33,27 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-
-
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
+    
 class GroupViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    
+class SiteDataViewSet(viewsets.ModelViewSet):
+    '''
+    retrieve complete site info
+    '''
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = SiteInfo.objects.all()
+    serializer_class = SiteSerializer
+    
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
+    
