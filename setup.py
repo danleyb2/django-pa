@@ -19,7 +19,7 @@ setup(
     license='GNU License',
     description='Django app that act as your restFull personal assistant',
     long_description=README,
-    url='https://www.example.com/',
+    url='https://github.com/danleyb2/django-pa/wiki',
     author='danleyb2',
     author_email='ndieksman@gmail.com',
     classifiers=[
