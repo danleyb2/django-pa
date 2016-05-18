@@ -30,7 +30,7 @@ class ProjectInline(admin.StackedInline):
     extra = 0
 
 class UserProfileAdmin1(admin_class):
-    inlines = admin_class.inlines+(UserProfileInline, )
+    inlines = tuple(admin_class.inlines)+(UserProfileInline, )
     model  = User
 
 
