@@ -1,8 +1,7 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-from .models import UserProfile
-from .models import Technology,Service,Location,Project,SiteInfo,Contact,Icon
+
+from .models import *
+
 # Register your models here.
 
 ua = admin.site._registry[User]
@@ -46,3 +45,4 @@ admin.site.register(UserProfile,UserProfileAdmin)
 admin.site.register(User,UserProfileAdmin1)
 admin.site.register([Technology,Service,Project,Location,Contact,Icon])
 admin.site.register(SiteInfo,SiteInfoAdmin)
+admin.site.register(Message)
