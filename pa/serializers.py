@@ -1,7 +1,7 @@
 from django.forms import widgets
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
-from .models import UserProfile,Location,Technology,Project,Service,SiteInfo,Contact,Icon
+from .models import *
 
 class IconSerializer(serializers.ModelSerializer):
     class Meta:
@@ -100,5 +100,7 @@ class SiteSerializer(serializers.HyperlinkedModelSerializer):
             location = LocationSerializer(read_only=True)
             )
    
-    
-    
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ('__all__')

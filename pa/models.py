@@ -75,3 +75,8 @@ class Service(models.Model):
     
     def __str__(self):
         return self.name
+
+class Message(models.Model):
+    sender_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    message = models.TextField()

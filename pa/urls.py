@@ -13,6 +13,8 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'site_data', views.SiteDataViewSet)
 router.register(r'groups', views.GroupViewSet)
+router.register(r'send_message', views.MessageSendViewSet)
+router.register(r'messages', views.MessagesViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -5,7 +5,7 @@ from .models import UserProfile,SiteInfo
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import viewsets
-from .serializers import UserSerializer, GroupSerializer,SiteSerializer,UserProfileSerializer
+from .serializers import *
 from rest_framework import permissions
 
 
@@ -25,7 +25,7 @@ def save_profile():
 def index(request):
     user_profile = request.user.profile
     
-    return HttpResponse("User url is : "+user_profile.url);
+    return HttpResponse("User url is : "+user_profile.url)
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -40,11 +40,31 @@ class UserViewSet(viewsets.ModelViewSet):
     
 class GroupViewSet(viewsets.ModelViewSet):
     """
-    API endpoint that allows groups to be viewed or edited.
+    API endpoint that allows messages to be viewed or edited.
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    
+
+class MessageSendViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows messages to be viewed.
+    """
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = (permissions.AllowAny,)
+    http_method_names = ['post']
+
+
+class MessagesViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows messages to be viewed.
+    """
+    queryset = Message.objects.all()
+    serializer_class = MessageSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    http_method_names = ['get']
+
+
 class SiteDataViewSet(viewsets.ModelViewSet):
     '''
     retrieve complete site info
