@@ -65,6 +65,19 @@ class MessagesViewSet(viewsets.ModelViewSet):
     http_method_names = ['get']
 
 
+class LocationViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows location to be updated.
+    """
+    queryset = Location.objects.all()
+    serializer_class = LocationSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+    http_method_names = ['post']
+
+    def perform_create(self, serializer):
+        serializer.save(profile=self.request.user.profile)
+
+
 class SiteDataViewSet(viewsets.ModelViewSet):
     '''
     retrieve complete site info
