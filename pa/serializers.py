@@ -31,9 +31,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 class LocationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Location
         fields = ('latitude','longitude',)
+
+
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
