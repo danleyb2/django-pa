@@ -41,8 +41,8 @@ class SiteInfo(models.Model):
 
 
 class Location(models.Model):
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
+    latitude = models.DecimalField(max_digits=12, decimal_places=8)
+    longitude = models.DecimalField(max_digits=12, decimal_places=8)
     profile = models.OneToOneField(UserProfile, related_name='location')
 
     def __str__(self):
