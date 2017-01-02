@@ -45,13 +45,13 @@ class ContactSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.HyperlinkedModelSerializer):
     #full_name = Field(source='company')
     info = serializers.SerializerMethodField()
-    contact = ContactSerializer(read_only=True)
+    contacts = ContactSerializer(read_only=True, many=True)
     location = LocationSerializer(read_only=True)
     #profile_image_url = serializers.SerializerMethodField('get_image_url')
     
     class Meta:
         model = UserProfile
-        fields = ('location', 'info','contact')
+        fields = ('location', 'info','contacts')
     
     def get_image_url(self,user_profile):
         return user_profile.profile_image.url
