@@ -31,6 +31,9 @@ class Contact(models.Model):
     )
     profile = models.ForeignKey(UserProfile,related_name='contacts')
     phone = models.CharField(validators=[phone_regex], blank=True, max_length=15)
+    
+    def __str__(self):
+        return str(self.email+' '+self.phone+' for '+self.profile)
 
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
@@ -46,7 +49,7 @@ class Location(models.Model):
     profile = models.OneToOneField(UserProfile, related_name='location')
 
     def __str__(self):
-        return str(self.latitude) + ' ' + str(self.longitude)
+        return self.profile+' at '+str(self.latitude) + ' ' + str(self.longitude)
 
 
 class Technology(models.Model):
@@ -87,3 +90,6 @@ class Message(models.Model):
     sender_name = models.CharField(max_length=100)
     email = models.EmailField()
     message = models.TextField()
+    
+    def __str__(self):
+        return self.sender_name+' to '+self.owner+': '+self.message
