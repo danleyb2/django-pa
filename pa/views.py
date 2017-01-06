@@ -74,8 +74,8 @@ class LocationViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
     http_method_names = ['post']
     
-    def get_serializer_context(self):
-        return {'request': self.request}
+    #def get_serializer_context(self):
+    #    return {'request': self.request}
 
     def perform_create(self, serializer):
         serializer.save(profile=self.request.user.profile)

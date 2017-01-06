@@ -34,9 +34,13 @@ class LocationSerializer(serializers.ModelSerializer):
     #profile = serializers.ReadOnlyField()
     
     def create(self, validated_data):
-        location =  Location(**validated_data)
-        location.profile = self.context['request'].user.profile
+        location,created =  Location.objects.get_or_create(profile = validated_data['profile'])
         
+        #location,created =  Location.objects.get_or_create(**validated_data)
+        location.latitude = validated_data['latitude']
+        location.longitude = validated_data['longitude']
+        
+        location.save()
         return location
 
     class Meta:
