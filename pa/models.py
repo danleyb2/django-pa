@@ -92,4 +92,4 @@ class Message(models.Model):
     message = models.TextField()
     
     def __str__(self):
-        return self.sender_name+' to '+self.owner+': '+self.message
+        return self.sender_name+' to '+self.owner.username+': '+self.message
