@@ -31,10 +31,17 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 class LocationSerializer(serializers.ModelSerializer):
+    #profile = serializers.ReadOnlyField()
+    
+    def create(self, validated_data):
+        location =  Location(**validated_data)
+        location.profile = self.context['request'].user.profile
+        
+        return location
 
     class Meta:
         model = Location
-        fields = ('latitude','longitude',)
+        fields = ('latitude','longitude')
 
 
 class ContactSerializer(serializers.ModelSerializer):
