@@ -118,3 +118,13 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ('__all__')
+        
+    def create(self, validated_data):
+        message =  Message(owner = validated_data['owner'])
+        
+        message.sender_name = validated_data['sender_name']
+        message.email = validated_data['email']
+        message.message = validated_data['message']
+        
+        message.save()
+        return message

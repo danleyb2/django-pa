@@ -51,8 +51,11 @@ class MessageSendViewSet(viewsets.ModelViewSet):
     """
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (permissions.IsAuthenticated,)
     http_method_names = ['post']
+    
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user.profile)
 
 
 class MessagesViewSet(viewsets.ModelViewSet):
